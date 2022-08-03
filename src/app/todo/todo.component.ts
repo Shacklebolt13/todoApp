@@ -11,13 +11,9 @@ export class TodoComponent implements OnInit {
 
   constructor() {
     this.todos = [
-      {
-        id: 1,
 
-        title: "hello",
-        desc: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem quisquam. ",
-        done: false
-      }
+        new Todo(1,"hello","lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem quisquam. ",false),
+
     ];
   }
 

@@ -7,9 +7,11 @@
  -->
 
 <div class="card" style="width: 18rem;" id="todo_{{todo.id}}"
-  [attr.style]="(todo.done)?'background-color:green':'background-color:red'">
+  [attr.style]="(todo.done)?'background-color:green':'background-color:red'" (click)="todo.toggleDone()">
   <div class="card-body">
     <p class="card-title mx-3">{{todo.title}}</p>
     <p class="card-text">{{todo.desc}}</p>
   </div>
 </div>
+
+
