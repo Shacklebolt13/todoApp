@@ -1,6 +1,15 @@
-<div id="todo_{{todo.id}}">
-  <h3>{{todo.title}}</h3>
-  <p>{{todo.title}}</p>
+<!-- <div>
+  <h3></h3>
+  <p></p>
   <input type="checkbox" *ngIf="todo.done" checked />
   <input type="checkbox" *ngIf="!todo.done" />
+</div>
+ -->
+
+<div class="card" style="width: 18rem;" id="todo_{{todo.id}}"
+  [attr.style]="(todo.done)?'background-color:green':'background-color:red'">
+  <div class="card-body">
+    <p class="card-title mx-3">{{todo.title}}</p>
+    <p class="card-text">{{todo.desc}}</p>
+  </div>
 </div>

@@ -15,11 +15,11 @@ export class TodoComponent implements OnInit {
         id: 1,
 
         title: "hello",
-        desc: "hello2",
+        desc: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem quisquam. ",
         done: false
       }
     ];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
