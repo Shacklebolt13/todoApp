@@ -1,0 +1,6 @@
+<div id="todo_{{todo.id}}">
+  <h3>{{todo.title}}</h3>
+  <p>{{todo.title}}</p>
+  <input type="checkbox" *ngIf="todo.done" checked />
+  <input type="checkbox" *ngIf="!todo.done" />
+</div>

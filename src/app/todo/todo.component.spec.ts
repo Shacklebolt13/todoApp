@@ -11,7 +11,9 @@ describe('TodoComponent', () => {
       declarations: [ TodoComponent ]
     })
     .compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(TodoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

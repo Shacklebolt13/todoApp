@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Todo } from "./todo-item/Item";
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  selector: "app-todo",
+  templateUrl: "./todo.component.html",
+  styleUrls: ["./todo.component.css"]
 })
 export class TodoComponent implements OnInit {
+  todos: Todo[];
 
-  constructor() { }
+  constructor() {
+    this.todos = [
+      {
+        id: 1,
 
-  ngOnInit(): void {
+        title: "hello",
+        desc: "hello2",
+        done: false
+      }
+    ];
   }
 
+  ngOnInit(): void {}
 }

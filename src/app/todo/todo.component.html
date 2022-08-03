@@ -1,1 +1,7 @@
-<p>todo works!</p>
+<div *ngIf="todos.length;else elseblock">
+  he
+  <ul type="none" *ngFor="let item of todos">
+    <app-todo-item [todo]="item"></app-todo-item>
+  </ul>
+</div>
+<ng-template #elseblock><p>No Todos to Show</p></ng-template>
