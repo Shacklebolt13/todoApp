@@ -11,7 +11,7 @@ export class Todo {
     this.done = done;
   }
 
-  toggleDone(): void {
+  toggleDone = () => {
     console.log("toggleDone");
     this.done = !this.done;
   }

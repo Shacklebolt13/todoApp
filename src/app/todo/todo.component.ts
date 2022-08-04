@@ -1,4 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { first } from "rxjs";
+import { TodocrudService } from "../todocrud.service";
 import { Todo } from "./todo-item/Item";
 
 @Component({
@@ -9,17 +11,18 @@ import { Todo } from "./todo-item/Item";
 
 export class TodoComponent implements OnInit {
 
-  todos: Todo[];
+  todos: Todo[] = [];
   doneStatus: boolean = false;
   @ViewChild("in_title") in_title!: ElementRef;
   @ViewChild("in_done") in_done!: ElementRef;
   @ViewChild("in_desc") in_desc!: ElementRef;
 
-  constructor() {
-    this.todos = [
-
-      new Todo(1, "hello", "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem quisquam. ", false),
-    ];
+  constructor(crudService: TodocrudService) {
+    crudService.getTodos().pipe(first()).subscribe((data: []) => {
+      data.forEach(element => {
+        this.todos.push(new Todo(element["id"], element["title"], element["desc"], element["done"]));
+      });;
+    });
   }
 
   ngOnInit(): void { }
