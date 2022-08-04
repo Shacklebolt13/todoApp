@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Todo } from "./todo-item/Item";
 
 @Component({
@@ -6,16 +6,25 @@ import { Todo } from "./todo-item/Item";
   templateUrl: "./todo.component.html",
   styleUrls: ["./todo.component.css"]
 })
+
 export class TodoComponent implements OnInit {
+
   todos: Todo[];
 
   constructor() {
     this.todos = [
 
-        new Todo(1,"hello","lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem quisquam. ",false),
+      new Todo(1, "hello", "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem quisquam. ", false),
 
     ];
   }
 
   ngOnInit(): void { }
+
+  destroyTodoHandlerParent(todo: Todo): void {
+    console.log("destroyTodoCaught");
+    this.todos = this.todos.filter(t => t !== todo);
+  }
 }
+
+

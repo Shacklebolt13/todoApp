@@ -4,7 +4,7 @@ export class Todo {
   desc!: string;
   done!: boolean;
 
-  constructor(id:number, title:string, desc:string, done:boolean) {
+  constructor(id: number, title: string, desc: string, done: boolean) {
     this.id = id;
     this.title = title;
     this.desc = desc;
@@ -15,6 +15,8 @@ export class Todo {
     console.log("toggleDone");
     this.done = !this.done;
   }
+
+
 }
 
 
