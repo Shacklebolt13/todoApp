@@ -30,9 +30,10 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-    - name: Create Release
+    
     - uses: actions/checkout@v2
-    - uses: ncipollo/release-action@v1
+    - name: Create Release
+      uses: ncipollo/release-action@v1
       with:
         artifacts: "release.tar.gz,foo/*.txt"
         bodyFile: "body.md"
