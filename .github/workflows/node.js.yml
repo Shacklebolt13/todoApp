@@ -2,12 +2,11 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-
 on:
   push:
-    tags:
-    - '*'
-
+    branches:
+    - main
+    - release/*
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,13 +24,25 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    
-    - uses: actions/checkout@v2
-    - name: Create Release
-      uses: ncipollo/release-action@v1
+    - name: Cache node modules
+      id: cache-nodemodules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
       with:
-        artifacts: "release.tar.gz,foo/*.txt"
-        bodyFile: "body.md"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        # caching node_modules
+        path: node_modules # 👈 path for node_modules folder
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        # 👆 name of the chache key includes package-lock.json
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+          
+    - name: Install Dependencies
+      if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+      run: |
+        npm ci
+    - name: Build
+      run: |
+        npm run build -- --prod 
