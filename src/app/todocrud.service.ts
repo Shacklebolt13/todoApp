@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { Todo } from './todo/todo-item/Item';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,31 @@ export class TodocrudService {
   constructor(private http: HttpClient) { }
 
   getTodos(): Observable<any> {
-    return this.http.get('http://localhost:8080/getTodos')
+    return this.http.get('http://localhost:8080/todos')
+      .pipe(
+        retry(1), // retry a failed request up to 1 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  addTodo(title: string, desc: string, done: boolean): Observable<any> {
+    return this.http.post('http://localhost:8080/todo', { title, desc, done })
+      .pipe(
+        retry(1), // retry a failed request up to 1 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  updateTodo(id: number, done: boolean): Observable<any> {
+    return this.http.put('http://localhost:8080/todo', { id, done })
+      .pipe(
+        retry(1), // retry a failed request up to 1 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  deleteTodo(id: number): Observable<any> {
+    return this.http.delete('http://localhost:8080/todo/' + id)
       .pipe(
         retry(1), // retry a failed request up to 1 times
         catchError(this.handleError) // then handle the error

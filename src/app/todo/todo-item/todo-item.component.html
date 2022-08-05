@@ -3,6 +3,6 @@
   <div class="card-body">
     <p class="card-title mx-3">{{todo.title}}</p>
     <p class="card-text">{{todo.desc}}</p>
-    <a href="#" class="btn btn-secondary" (click)="destroyTodoHandlerChild()">Delete</a>
+    <a href="#" class="btn btn-secondary" (click)="destroyTodoHandlerChild();$event.stopPropagation()">Delete</a>
   </div>
 </div>
